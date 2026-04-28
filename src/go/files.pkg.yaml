@@ -1,0 +1,72 @@
+apiVersion: gh-infra/v1
+kind: FileSet
+metadata:
+  owner: nekrassov01
+
+spec:
+  repositories:
+    - name: logger
+    - name: filter
+    - name: mintab
+
+  files:
+    # from base
+    - path: .vscode/extensions.json
+      source: ./templates/base/.vscode/extensions.json
+      reconcile: create_only
+
+    - path: .vscode/settings.json
+      source: ./templates/base/.vscode/settings.json
+      reconcile: create_only
+
+    - path: .editorconfig
+      source: ./templates/base/.editorconfig
+      reconcile: patch
+
+    - path: .gitattributes
+      source: ./templates/base/.gitattributes
+      reconcile: create_only
+
+    - path: .gitignore
+      source: ./templates/base/.gitignore
+      reconcile: create_only
+
+    - path: .golangci.yml
+      source: ./templates/base/.golangci.yml
+      reconcile: create_only
+
+    - path: .tagpr
+      source: ./templates/base/.tagpr
+      reconcile: create_only
+
+    - path: LICENSE
+      source: ./templates/base/LICENSE
+      reconcile: create_only
+
+    - path: go.mod
+      source: ./templates/base/go.mod
+      reconcile: create_only
+
+    # from pkg
+    - path: .github
+      source: ./templates/pkg/.github/
+      reconcile: mirror
+
+    - path: benchmarks
+      source: ./templates/pkg/benchmarks/
+      reconcile: create_only
+
+    - path: .octocov.yml
+      source: ./templates/pkg/.octocov.yml
+      reconcile: patch
+
+    - path: Makefile
+      source: ./templates/pkg/Makefile
+      reconcile: create_only
+
+    - path: README.md
+      source: ./templates/pkg/README.md
+      reconcile: create_only
+
+  via: push
+  commit_message: "ci: sync shared files"

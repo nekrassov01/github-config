@@ -1,0 +1,139 @@
+apiVersion: gh-infra/v1
+kind: RepositorySet
+metadata:
+  owner: nekrassov01
+
+defaults:
+  spec:
+    visibility: public
+    features:
+      projects: false
+      wiki: false
+      discussions: false
+    merge_strategy:
+      allow_merge_commit: false
+      allow_squash_merge: true
+      allow_rebase_merge: false
+      auto_delete_head_branches: true
+      squash_merge_commit_title: COMMIT_OR_PR_TITLE
+    rulesets:
+      - name: protect-main
+        target: branch
+        enforcement: active
+        bypass_actors:
+          - role: admin
+            bypass_mode: always
+        conditions:
+          ref_name:
+            include:
+              - "refs/heads/main"
+        rules:
+          pull_request:
+            required_approving_review_count: 1
+            dismiss_stale_reviews_on_push: true
+            require_code_owner_review: true
+            require_last_push_approval: false
+            required_review_thread_resolution: true
+          non_fast_forward: true
+          deletion: true
+          creation: false
+          required_linear_history: false
+          required_signatures: false
+    actions:
+      enabled: true
+      workflow_permissions: write
+      can_approve_pull_requests: true
+
+repositories:
+  - name: github-config
+    spec:
+      description: GitHub repository management with babarot/gh-infra
+
+  # --------
+  #  tools
+  # --------
+
+  - name: llcm
+    spec:
+      description: AWS log groups lifecycle manager
+      topics: [go, cli, cloudwatch, log, visualization]
+      homepage: https://pkg.go.dev/github.com/nekrassov01/llcm
+      secrets:
+        - name: HOMEBREW_TAP_GITHUB_TOKEN
+          value: "${HOMEBREW_TAP_GITHUB_TOKEN}"
+
+  - name: s3bytes
+    spec:
+      description: S3 size checker CLI
+      topics: [go, cli, s3, visualization]
+      homepage: https://pkg.go.dev/github.com/nekrassov01/s3bytes
+      secrets:
+        - name: HOMEBREW_TAP_GITHUB_TOKEN
+          value: "${HOMEBREW_TAP_GITHUB_TOKEN}"
+
+  - name: tlc3
+    spec:
+      description: TLS cert checker CLI
+      homepage: https://pkg.go.dev/github.com/nekrassov01/tlc3
+      topics: [go, cli, cert, ssl, tls]
+      secrets:
+        - name: HOMEBREW_TAP_GITHUB_TOKEN
+          value: "${HOMEBREW_TAP_GITHUB_TOKEN}"
+
+  - name: backlog-utils
+    spec:
+      description: Backlog API utilities
+      topics: [go, cli, backlog, api-client]
+      homepage: https://pkg.go.dev/github.com/nekrassov01/backlog-utils
+      secrets:
+        - name: HOMEBREW_TAP_GITHUB_TOKEN
+          value: "${HOMEBREW_TAP_GITHUB_TOKEN}"
+
+  - name: lem
+    spec:
+      description: The env splitting, delivery, replacement, and monitoring tool for monorepo
+      topics: [go, cli, dotenv, direnv, monorepo]
+      homepage: https://pkg.go.dev/github.com/nekrassov01/lem
+      secrets:
+        - name: HOMEBREW_TAP_GITHUB_TOKEN
+          value: "${HOMEBREW_TAP_GITHUB_TOKEN}"
+
+  - name: ignoresync
+    spec:
+      description: Your shadow repository for ignored files
+      homepage: https://pkg.go.dev/github.com/nekrassov01/ignoresync
+      topics: [go, cli, s3, kms, git, security]
+      secrets:
+        - name: HOMEBREW_TAP_GITHUB_TOKEN
+          value: "${HOMEBREW_TAP_GITHUB_TOKEN}"
+
+  - name: isoage
+    spec:
+      description: Simple isolation for agents using git worktree and docker
+      homepage: https://pkg.go.dev/github.com/nekrassov01/isoage
+      topics: [go, cli, ai, agent, docker, git-worktree, proxy]
+      secrets:
+        - name: HOMEBREW_TAP_GITHUB_TOKEN
+          value: "${HOMEBREW_TAP_GITHUB_TOKEN}"
+
+  # -----------
+  #  packages
+  # -----------
+
+  - name: logger
+    spec:
+      description: A customizable, minimal, zero-allocation, slog-based logger for Go CLI
+      homepage: https://pkg.go.dev/github.com/nekrassov01/logger
+      topics: [go, slog, logger, zero-allocation]
+
+  - name: filter
+    spec:
+      description: The minimal filter expressions for Go
+      homepage: https://pkg.go.dev/github.com/nekrassov01/filter
+      topics: [go, dsl, intereter, filter-expression, no-reflection]
+
+  - name: mintab
+    spec:
+      description: The minimal ASCII table utilities for Go
+      homepage: https://pkg.go.dev/github.com/nekrassov01/mintab
+      topics: [go, ascii, table, backlog]

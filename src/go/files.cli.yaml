@@ -1,0 +1,121 @@
+apiVersion: gh-infra/v1
+kind: FileSet
+metadata:
+  owner: nekrassov01
+
+spec:
+  repositories:
+    - name: llcm
+      overrides:
+        - path: .goreleaser.yml
+          vars:
+            CommandName: llcm
+            Description: AWS log groups lifecycle manager
+
+    - name: s3bytes
+      overrides:
+        - path: .goreleaser.yml
+          vars:
+            CommandName: s3bytes
+            Description: S3 size checker CLI
+
+    - name: tlc3
+      overrides:
+        - path: .goreleaser.yml
+          vars:
+            CommandName: tlc3
+            Description: TLS cert checker CLI
+
+    - name: backlog-utils
+      overrides:
+        - path: .goreleaser.yml
+          vars:
+            CommandName: bkl
+            Description: Backlog API utilities
+
+    - name: lem
+      overrides:
+        - path: .goreleaser.yml
+          vars:
+            CommandName: lem
+            Description: The env splitting, delivery, replacement, and monitoring tool for monorepo
+
+    - name: ignoresync
+      overrides:
+        - path: .goreleaser.yml
+          vars:
+            CommandName: ignoresync
+            Description: Your shadow repository for ignored files
+
+    - name: isoage
+      overrides:
+        - path: .goreleaser.yml
+          vars:
+            CommandName: isoage
+            Description: Simple isolation for agents using git worktree and docker
+  files:
+    # from base
+    - path: .vscode/extensions.json
+      source: ./templates/base/.vscode/extensions.json
+      reconcile: create_only
+
+    - path: .vscode/settings.json
+      source: ./templates/base/.vscode/settings.json
+      reconcile: create_only
+
+    - path: .editorconfig
+      source: ./templates/base/.editorconfig
+      reconcile: patch
+
+    - path: .gitattributes
+      source: ./templates/base/.gitattributes
+      reconcile: create_only
+
+    - path: .gitignore
+      source: ./templates/base/.gitignore
+      reconcile: create_only
+
+    - path: .golangci.yml
+      source: ./templates/base/.golangci.yml
+      reconcile: create_only
+
+    - path: .tagpr
+      source: ./templates/base/.tagpr
+      reconcile: create_only
+
+    - path: LICENSE
+      source: ./templates/base/LICENSE
+      reconcile: create_only
+
+    - path: go.mod
+      source: ./templates/base/go.mod
+      reconcile: create_only
+
+    # from cli
+    - path: .github
+      source: ./templates/cli/.github/
+      reconcile: mirror
+
+    - path: .goreleaser.yml
+      source: ./templates/cli/.goreleaser.yml
+      reconcile: create_only
+      vars:
+        CommandName:
+        Description:
+
+    - path: .octocov.yml
+      source: ./templates/cli/.octocov.yml
+      reconcile: patch
+
+    - path: Makefile
+      source: ./templates/cli/Makefile
+      reconcile: create_only
+      vars:
+        CommandName:
+
+    - path: README.md
+      source: ./templates/cli/README.md
+      reconcile: create_only
+
+  via: push
+  commit_message: "ci: sync shared files"
