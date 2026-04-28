@@ -29,7 +29,6 @@ The directory tree has been optimized as follows:
 └── go
     ├── files.cli.yaml
     ├── files.pkg.yaml
-    ├── files.yaml
     ├── repos.yaml
     └── templates
         ├── base
