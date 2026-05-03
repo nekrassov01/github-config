@@ -27,10 +27,6 @@ spec:
       source: ./templates/base/.gitattributes
       reconcile: create_only
 
-    - path: .gitignore
-      source: ./templates/base/.gitignore
-      reconcile: create_only
-
     - path: .golangci.yml
       source: ./templates/base/.golangci.yml
       reconcile: create_only
@@ -51,6 +47,10 @@ spec:
     - path: .github
       source: ./templates/pkg/.github/
       reconcile: mirror
+
+    - path: .gitignore
+      source: ./templates/pkg/.gitignore
+      reconcile: create_only
 
     - path: benchmarks
       source: ./templates/pkg/benchmarks/
