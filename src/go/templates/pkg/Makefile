@@ -41,7 +41,7 @@ endif
 
 clean:
 	go clean
-	rm -f $(NAME) coverage.out coverage.html cpu.prof mem.prof $(NAME).test
+	rm -f coverage.out coverage.html cpu.prof mem.prof
 	@cd benchmarks && $(MAKE) clean
 
 # --------
