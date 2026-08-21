@@ -108,33 +108,24 @@ repositories:
         - name: HOMEBREW_TAP_GITHUB_TOKEN
           value: "${HOMEBREW_TAP_GITHUB_TOKEN}"
 
-  - name: isoage
-    spec:
-      description: Simple isolation for agents using git worktree and docker
-      homepage: https://pkg.go.dev/github.com/nekrassov01/isoage
-      topics: [go, cli, ai, agent, docker, git-worktree, proxy]
-      secrets:
-        - name: HOMEBREW_TAP_GITHUB_TOKEN
-          value: "${HOMEBREW_TAP_GITHUB_TOKEN}"
-
   # -----------
   #  packages
   # -----------
+
+  - name: table
+    spec:
+      description: A high-performance table rendering library for Go, with streaming APIs for every output format
+      homepage: https://pkg.go.dev/github.com/nekrassov01/table
+      topics: [go, table, streaming, ascii, utf-8, markdown, backlog, csv]
 
   - name: logger
     spec:
       description: A customizable, minimal, zero-allocation, slog-based logger for Go CLI
       homepage: https://pkg.go.dev/github.com/nekrassov01/logger
-      topics: [go, slog, logger, zero-allocation]
+      topics: [go, log, slog, logger, zero-allocation]
 
   - name: filter
     spec:
       description: The minimal filter expressions for Go
       homepage: https://pkg.go.dev/github.com/nekrassov01/filter
-      topics: [go, dsl, intereter, filter-expression, no-reflection]
-
-  - name: mintab
-    spec:
-      description: The minimal ASCII table utilities for Go
-      homepage: https://pkg.go.dev/github.com/nekrassov01/mintab
-      topics: [go, ascii, table, backlog]
+      topics: [go, dsl, interpreter, filter-expression, no-reflection]

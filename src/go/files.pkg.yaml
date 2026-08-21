@@ -5,9 +5,9 @@ metadata:
 
 spec:
   repositories:
+    - name: table
     - name: logger
     - name: filter
-    - name: mintab
 
   files:
     # from base
@@ -21,7 +21,7 @@ spec:
 
     - path: .editorconfig
       source: ./templates/base/.editorconfig
-      reconcile: patch
+      reconcile: create_only
 
     - path: .gitattributes
       source: ./templates/base/.gitattributes
@@ -46,7 +46,7 @@ spec:
     # from pkg
     - path: .github
       source: ./templates/pkg/.github/
-      reconcile: mirror
+      reconcile: create_only
 
     - path: .gitignore
       source: ./templates/pkg/.gitignore
@@ -58,7 +58,7 @@ spec:
 
     - path: .octocov.yml
       source: ./templates/pkg/.octocov.yml
-      reconcile: patch
+      reconcile: create_only
 
     - path: Makefile
       source: ./templates/pkg/Makefile
@@ -69,4 +69,4 @@ spec:
       reconcile: create_only
 
   via: push
-  commit_message: "ci: sync shared files"
+  commit_message: "chore: setup config"

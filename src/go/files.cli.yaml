@@ -47,12 +47,6 @@ spec:
             CommandName: ignoresync
             Description: Your shadow repository for ignored files
 
-    - name: isoage
-      overrides:
-        - path: .goreleaser.yml
-          vars:
-            CommandName: isoage
-            Description: Simple isolation for agents using git worktree and docker
   files:
     # from base
     - path: .vscode/extensions.json
@@ -65,7 +59,7 @@ spec:
 
     - path: .editorconfig
       source: ./templates/base/.editorconfig
-      reconcile: patch
+      reconcile: create_only
 
     - path: .gitattributes
       source: ./templates/base/.gitattributes
@@ -90,7 +84,7 @@ spec:
     # from cli
     - path: .github
       source: ./templates/cli/.github/
-      reconcile: mirror
+      reconcile: create_only
 
     - path: .gitignore
       source: ./templates/cli/.gitignore
@@ -105,7 +99,7 @@ spec:
 
     - path: .octocov.yml
       source: ./templates/cli/.octocov.yml
-      reconcile: patch
+      reconcile: create_only
 
     - path: Makefile
       source: ./templates/cli/Makefile
@@ -118,4 +112,4 @@ spec:
       reconcile: create_only
 
   via: push
-  commit_message: "ci: sync shared files"
+  commit_message: "chore: setup config"
