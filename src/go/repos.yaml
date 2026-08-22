@@ -114,9 +114,9 @@ repositories:
 
   - name: table
     spec:
-      description: A high-performance table rendering library for Go, with streaming APIs for every output format
+      description: A high-performance table rendering library for Go
       homepage: https://pkg.go.dev/github.com/nekrassov01/table
-      topics: [go, table, streaming, ascii, utf-8, markdown, backlog, csv]
+      topics: [go, table, streaming, ascii, unicode, markdown, backlog, csv]
 
   - name: logger
     spec:
